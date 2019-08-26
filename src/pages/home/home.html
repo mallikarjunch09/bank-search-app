@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-list>
+    <ion-item>
+      <ion-label>Banks</ion-label>
+      <ion-select [(ngModel)]="selectedBank" (ionChange)="onChange($event)">
+        <ion-option value="bangalore" selected>Bangalore</ion-option>
+        <ion-option value="mumbai">Mumbai</ion-option>
+        <ion-option value="chennai">Chennai</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-searchbar [(ngModel)]="mySearch" [showCancelButton]="shouldShowCancel" (ionInput)="searchChanges($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+</ion-header>
+
+<ion-content scroll="false" no-padding>
+
+  <h4 style="text-align: center" *ngIf="banksList.length == 0"> No records found</h4>
+  <ion-list [virtualScroll]="banksList">
+    <ion-card *virtualItem="let item; let itemBounds = bounds;">
+      <ion-card-header>
+        <ion-card-title>{{ item.bank_name }}</ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <span>{{ item.branch }}</span>
+        <span style="float: right;">{{ item.ifsc }}</span>
+      </ion-item>
+    </ion-card>
+  
+  </ion-list>
+
+
+</ion-content>
